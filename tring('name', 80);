@@ -1,0 +1,23 @@
+commit be67d8efa7ce7ecd8cc9ad824bb56cfdb4f90c2d
+Author: fabiojs <fabiojfl@gmail.com>
+Date:   Wed Mar 9 14:27:13 2016 -0300
+
+    create model (Category and Product) create migrate (categories and products)
+
+commit 4c9627e40720554021bbe29f04f0df0c1a3ce79e
+Author: Fábio José <fabiojfl@gmail.com>
+Date:   Mon Mar 7 08:58:18 2016 -0300
+
+    composer autoload for namespace
+
+commit 0cde3b801a6165a831858babe6f1aee34e6f27e3
+Author: fabiojs <fabiojfl@gmail.com>
+Date:   Mon Mar 7 08:04:02 2016 -0300
+
+    add namespace CodeCommerce
+
+commit 4a511e250bcd31896a0384f84773503d4450671b
+Author: fabiojs <fabiojfl@gmail.com>
+Date:   Mon Mar 7 07:53:49 2016 -0300
+
+    First commit
