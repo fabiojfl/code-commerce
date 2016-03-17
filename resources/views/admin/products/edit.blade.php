@@ -9,7 +9,7 @@
                 </div>
             @endforeach
         @endif
-        {!! Form::model($negocio, ['route'=>['admin.products.update',$negocio->id], 'method'=>'put']) !!}
+        {!! Form::model($product, ['route'=>['admin.products.update',$product->id], 'method'=>'put']) !!}
         @include('admin.products._form')
 
         <div class="form-group">

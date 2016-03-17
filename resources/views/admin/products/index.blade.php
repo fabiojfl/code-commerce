@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
         <div class="container">
-                <h1>Create new Product</h1>
+                <h1>Product list</h1>
                 <hr>
                 <div class="form-group">
                         <a href="{{route('admin.products.create')}}" class="btn btn-primary">Create new Product</a><!-- /.box-header -->
