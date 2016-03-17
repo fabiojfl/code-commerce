@@ -23,7 +23,6 @@ Route::controllers([
 Route::group(['prefix'=>'admin'], function(){
 
 	Route::group(['prefix' => 'categories/'], function(){
-
 		//categories
 		Route::get(''             ,['as' => 'admin.categories.index', 'uses' => 'AdminCategoriesController@index']);
 		Route::get('show/{id}'    ,['as' => 'admin.categories.show',  'uses' => 'AdminCategoriesController@show']);
