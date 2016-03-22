@@ -26,7 +26,12 @@ class AdminProductsController extends Controller {
 
     public function store(ProductRequest $request)
     {
-        $this->product->create($request->all());
+        $input = $request->all();
+        $input['featured'] = $request->get('featured') ? true : false;
+        $input['recommend'] = $request->get('recommend') ? true : false;
+        $product = $this->product->fill($input);
+        $product->save();
+
         return redirect()->route('admin.products.index');
     }
 
@@ -38,7 +43,11 @@ class AdminProductsController extends Controller {
 
     public function update($id, ProductRequest $request)
     {
-        $this->product->find($id)->update($request->all());
+        $input = $request->all();
+        $input['featured'] = $request->get('featured') ? true : false;
+        $input['recommend'] = $request->get('recommend') ? true : false;
+        $this->product->find($id)->update($input);
+
         return redirect()->route('admin.products.index');
     }
 
