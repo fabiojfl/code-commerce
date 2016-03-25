@@ -29,6 +29,7 @@
                         </tr>
                         @endforeach
                 </table>
+                {!! $products->render() !!}
         </div>
-{!! $products->render() !!}
+
 @endsection
