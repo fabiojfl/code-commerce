@@ -10,4 +10,9 @@ class Category extends Model {
         'description'
     ];
 
+    public function products()
+    {
+        return $this->hasMany('CodeCommerce\Product');
+    }
+
 }
