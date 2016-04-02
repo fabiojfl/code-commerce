@@ -35,12 +35,18 @@ Route::group(['prefix'=>'admin'], function(){
 
 	Route::group(['prefix' => 'products'], function(){
 		//products
-		Route::get(''             ,['as' => 'admin.products.index', 'uses' => 'AdminProductsController@index']);
-		Route::get('show/{id}'    ,['as' => 'admin.products.show',  'uses' => 'AdminProductsController@show']);
-		Route::get('create'       ,['as'=>  'admin.products.create','uses'=>'AdminProductsController@create']);
-		Route::post('store'       ,['as'=>  'admin.products.store','uses'=>'AdminProductsController@store']);
-		Route::get('edit/{id}'    ,['as'=>  'admin.products.edit','uses'=>'AdminProductsController@edit']);
-		Route::put('update/{id}'  ,['as'=>  'admin.products.update','uses'=>'AdminProductsController@update']);
-		Route::get('destroy/{id}' ,['as'=>  'admin.products.destroy','uses'=>'AdminProductsController@destroy']);
+		Route::get(''             ,['as' => 'admin.products.index',  'uses' => 'AdminProductsController@index']);
+		Route::get('show/{id}'    ,['as' => 'admin.products.show',   'uses' => 'AdminProductsController@show']);
+		Route::get('create'       ,['as'=>  'admin.products.create', 'uses'=>  'AdminProductsController@create']);
+		Route::post('store'       ,['as'=>  'admin.products.store',  'uses'=>  'AdminProductsController@store']);
+		Route::get('edit/{id}'    ,['as'=>  'admin.products.edit',   'uses'=>  'AdminProductsController@edit']);
+		Route::put('update/{id}'  ,['as'=>  'admin.products.update', 'uses'=>  'AdminProductsController@update']);
+		Route::get('destroy/{id}' ,['as'=>  'admin.products.destroy','uses'=>  'AdminProductsController@destroy']);
+
+		// products image
+		Route::get('images/{id}/product'  ,['as'=>'admin.products.images',         'uses'=>'AdminProductsController@images']);
+		Route::get('create/{id}/product'  ,['as'=>'admin.products.create_image',   'uses'=>'AdminProductsController@createImage']);
+		Route::post('store/{id}/images'   ,['as'=>'admin.products.images.store',   'uses'=>'AdminProductsController@storeImage']);
+		Route::get('destroy/{id}/image'   ,['as'=>'admin.products.images.destroy', 'uses'=>'AdminProductsController@destroyImage']);
 	});
 });

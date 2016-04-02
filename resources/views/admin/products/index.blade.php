@@ -17,10 +17,13 @@
                         <tr>
                                 <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->price}}</td>
+                                <td><b>R$</b>&nbsp;{{ number_format($product->price, 2) }}</td>
                                 <td>
                                         <a href="{{ route('admin.products.edit',['id'=> $product->id]) }}">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="{{ route('admin.products.images',['id'=> $product->id]) }}">
+                                                <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                                         </a>
                                         <a href="{{ route('admin.products.destroy',['id'=> $product->id]) }}">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
