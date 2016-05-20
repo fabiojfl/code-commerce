@@ -22,4 +22,27 @@ class Product extends Model {
     {
         return $this->belongsTo('CodeCommerce\Category');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('CodeCommerce\Tag');
+    }
+
+    public function getNameDescriptionAttribute()
+    {
+        return $this->name." - ".$this->description;
+    }
+
+    public function getTagListAttribute()
+    {
+        $tags = $this->tags->lists('name');
+        return implode(',',$tags);
+    }
+
+    public function setTagAttribute($empty)
+    {
+        $value =  implode(',', $empty);
+        return $this->tags()->attach($value);
+    }
+
 }

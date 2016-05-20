@@ -14,8 +14,14 @@
         @include('admin.products._form')
 
         <div class="form-group">
+            {!! Form::label('tags','Tags:') !!}
+            {!! Form::textarea('tags', null, ['class'=>'form-control']) !!}
+        </div>
+
+        <div class="form-group">
             {!! Form::submit('Create Product',['class'=>'btn btn-primary']) !!}
         </div>
+
         {!! Form::close() !!}
     </div>
 @endsection

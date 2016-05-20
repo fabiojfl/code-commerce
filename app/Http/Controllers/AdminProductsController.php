@@ -4,21 +4,25 @@ use CodeCommerce\Http\Requests\ProductImageRequest;
 use CodeCommerce\Http\Requests\ProductRequest;
 use CodeCommerce\Product;
 use CodeCommerce\ProductImage;
+use CodeCommerce\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 class AdminProductsController extends Controller {
 
     private $product;
+    private $tag;
 
-    public function __construct(Product $product)
+    public function __construct(Product $product, Tag $tag)
     {
         $this->product = $product;
+        $this->tag = $tag;
     }
 
     public function index()
     {
         $products = $this->product->paginate(5);
+        //$plists   = $this->product->getNameDescriptionAttribute();
         return view('admin.products.index', compact('products'));
     }
 
@@ -30,11 +34,19 @@ class AdminProductsController extends Controller {
 
     public function store(ProductRequest $request)
     {
-        $input = $request->all();
-        $input['featured'] = $request->get('featured') ? true : false;
+        //dd($request->all());
+        //$product->sync($tagsIDs);
+
+        $input['featured']  = $request->get('featured')  ? true : false;
         $input['recommend'] = $request->get('recommend') ? true : false;
-        $product = $this->product->fill($input);
+        $input['tag']       = $request->get('tag');
+
+        $input      = $request->all();
+        $product    = $this->product->fill($input);
+        $product    =  $this->product->setTagAttribute($input['tag']);
+
         $product->save();
+
 
         return redirect()->route('admin.products.index');
     }
@@ -64,7 +76,6 @@ class AdminProductsController extends Controller {
     public function images($id)
     {
         $product = $this->product->find($id);
-
         return view('admin.products.images', compact('product'));
     }
 
@@ -99,5 +110,4 @@ class AdminProductsController extends Controller {
 
         return redirect()->route('admin.products.images',['id' => $product->id]);
     }
-
 }
