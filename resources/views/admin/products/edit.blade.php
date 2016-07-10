@@ -10,7 +10,13 @@
             @endforeach
         @endif
         {!! Form::model($product, ['route'=>['admin.products.update',$product->id], 'method'=>'put']) !!}
+
         @include('admin.products._form')
+
+        <div class="form-group">
+            {!! Form::label('tags','Tags:') !!}
+            {!! Form::textarea('tags', $product->tagList, ['class'=>'form-control']) !!}
+        </div>
 
         <div class="form-group">
             {!! Form::submit('Edit Product',['class'=>'btn btn-primary']) !!}

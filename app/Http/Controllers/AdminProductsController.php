@@ -22,7 +22,6 @@ class AdminProductsController extends Controller {
     public function index()
     {
         $products = $this->product->paginate(5);
-        //$plists   = $this->product->getNameDescriptionAttribute();
         return view('admin.products.index', compact('products'));
     }
 
@@ -34,21 +33,23 @@ class AdminProductsController extends Controller {
 
     public function store(ProductRequest $request)
     {
-        //dd($request->all());
-        //$product->sync($tagsIDs);
+        $tags = array_filter(array_map('trim', explode(',',$request->tags)));
+
+        $tagsIDs = [];
+
+        foreach($tags as $tagName){
+            $tagsIDs[] = Tag::firstOrCreate(['name'=> $tagName])->id;
+        }
 
         $input['featured']  = $request->get('featured')  ? true : false;
         $input['recommend'] = $request->get('recommend') ? true : false;
-        $input['tag']       = $request->get('tag');
-
-        $input      = $request->all();
-        $product    = $this->product->fill($input);
-        $product    =  $this->product->setTagAttribute($input['tag']);
-
+        $input              = $request->all();
+        $product            = $this->product->fill($input);
         $product->save();
 
-
+        $product->tags()->sync($this->getTagIds($request->tags));
         return redirect()->route('admin.products.index');
+
     }
 
     public function edit($id)
@@ -62,7 +63,12 @@ class AdminProductsController extends Controller {
         $input = $request->all();
         $input['featured'] = $request->get('featured') ? true : false;
         $input['recommend'] = $request->get('recommend') ? true : false;
+
         $this->product->find($id)->update($input);
+        $product = $this->product->find($id);
+
+        $product->tags()->sync($this->getTagIds($request->tags));
+
 
         return redirect()->route('admin.products.index');
     }
@@ -109,5 +115,21 @@ class AdminProductsController extends Controller {
         $image->delete();
 
         return redirect()->route('admin.products.images',['id' => $product->id]);
+    }
+
+    //search id tags
+
+    public function getTagIds($tags)
+    {
+        $tagList = array_filter(array_map('trim', explode(',',$tags)));
+
+        $tagsIDs = [];
+
+        foreach($tagList as $tagName)
+        {
+            $tagsIDs[] = Tag::firstOrCreate(['name'=> $tagName])->id;
+        }
+
+        return $tagsIDs;
     }
 }

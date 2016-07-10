@@ -33,10 +33,11 @@ class Product extends Model {
         return $this->name." - ".$this->description;
     }
 
+
     public function getTagListAttribute()
     {
-        $tags = $this->tags->lists('name');
-        return implode(',',$tags);
+        $tags = $this->tags()->lists('name');
+        return implode(', ',$tags);
     }
 
     public function setTagAttribute($empty)
@@ -44,5 +45,6 @@ class Product extends Model {
         $value =  implode(',', $empty);
         return $this->tags()->attach($value);
     }
+
 
 }
