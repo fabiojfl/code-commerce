@@ -17,6 +17,11 @@ class Product extends Model {
     {
         return $this->belongsTo('CodeCommerce\Category');
     }
+    
+    public function categories()
+    {
+    	return $this->belongsTo('CodeCommerce\Category');
+    }
 
     public function images()
     {
@@ -39,11 +44,21 @@ class Product extends Model {
         $tags = $this->tags()->lists('name');
         return implode(', ',$tags);
     }
-
+    
     public function setTagAttribute($empty)
     {
         $value =  implode(',', $empty);
         return $this->tags()->attach($value);
+    }
+    
+    public function scopeFeatured($query)
+    {
+    	return $query->where('featured', '=', 1);
+    }
+    
+    public function scopeFindCategory($query, $id)
+    {
+    	return $query->where('category_id', '=', $id);
     }
 
 

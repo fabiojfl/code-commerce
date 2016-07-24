@@ -19,7 +19,7 @@ class StoreController extends Controller
 	public function index()
 	{
 		$categories = $this->category->all();
-		$pFeatured   = $this->product->where('featured', '=', 1 )->get();
+		$pFeatured   = $this->product->featured()->get();
 
 		return view('store.index', compact('categories', 'pFeatured'));
 	}
@@ -27,7 +27,7 @@ class StoreController extends Controller
 	public function product_category($id)
 	{
 		$categories  = $this->category->all();
-		$products    = $this->product->where('category_id','=',$id)->get();
+		$products    = $this->product->findCategory($id)->get();
 
 		return view('store.product_categories.products',compact('categories','products'));
 

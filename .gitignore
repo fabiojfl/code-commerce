@@ -3,4 +3,5 @@
 .env
 .idea
 .idea/workspace.xml
-
+.project
+.settings/

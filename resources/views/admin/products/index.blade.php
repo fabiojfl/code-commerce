@@ -9,6 +9,7 @@
                 <table class="table">
                         <tr>
                                 <th>ID</th>
+                                <th>Category</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Action</th>
@@ -16,6 +17,7 @@
                         @foreach($products as $product)
                         <tr>
                                 <td>{{$product->id}}</td>
+                                <td>{{$product->category->name}}</td>
                                 <td>{{$product->name}}</td>
                                 <td><b>R$</b>&nbsp;{{ number_format($product->price, 2) }}</td>
                                 <td>

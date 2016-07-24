@@ -7,16 +7,19 @@ use CodeCommerce\ProductImage;
 use CodeCommerce\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use CodeCommerce\Category;
 
 class AdminProductsController extends Controller {
 
-    private $product;
+    private $category;
+	private $product;
     private $tag;
 
-    public function __construct(Product $product, Tag $tag)
+    public function __construct(Category $category, Product $product, Tag $tag)
     {
-        $this->product = $product;
-        $this->tag = $tag;
+    	$this->category = $category;
+        $this->product  = $product;
+        $this->tag      = $tag;
     }
 
     public function index()
@@ -27,8 +30,8 @@ class AdminProductsController extends Controller {
 
     public function create()
     {
-        //$categories = $this->product->lists('name', 'id');
-        return view('admin.products.create');
+        $categories = $this->category->lists('name', 'id');
+        return view('admin.products.create',compact('categories'));
     }
 
     public function store(ProductRequest $request)
@@ -54,8 +57,10 @@ class AdminProductsController extends Controller {
 
     public function edit($id)
     {
+    	$categories = $this->category->lists('name', 'id');
+    	
         $product = $this->product->find($id);
-        return view('admin.products.edit',compact('product'));
+        return view('admin.products.edit',compact('product', 'categories'));
     }
 
     public function update($id, ProductRequest $request)
