@@ -58,8 +58,8 @@ class AdminProductsController extends Controller {
     public function edit($id)
     {
     	$categories = $this->category->lists('name', 'id');
-    	
         $product = $this->product->find($id);
+
         return view('admin.products.edit',compact('product', 'categories'));
     }
 

@@ -15,6 +15,8 @@ Route::get('/', 'StoreController@index');
 Route::get('/product-categories/{id}' ,['as' => 'store.product_categories.products', 'uses' => 'StoreController@product_category']);
 
 Route::get('home', 'HomeController@index');
+Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
+Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
