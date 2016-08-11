@@ -4,6 +4,11 @@
 .idea
 .project
 .settings/
+<<<<<<< HEAD
 .idea/workspace.xml
 .config/database.php
+=======
+idea/workspace.xml
+config/database.php
+>>>>>>> 07e8aae3f5364192a0787a76c724d1676f13ffd5
 
