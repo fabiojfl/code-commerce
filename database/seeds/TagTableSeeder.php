@@ -13,7 +13,7 @@ class TagTableSeeder extends Seeder
 
         $faker = Faker::create();
 
-        foreach(range(1,5) as $i)
+        foreach(range(1,3) as $i)
         {
             Tag::create(['name' => $faker->word()]);
         }

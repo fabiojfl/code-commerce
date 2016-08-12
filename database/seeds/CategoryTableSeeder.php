@@ -12,7 +12,7 @@ class CategoryTableSeeder extends Seeder
 
         $faker = Faker::create();
 
-        foreach(range(1,10) as $i)
+        foreach(range(1,3) as $i)
         {
             Category::create([
                 'name' => $faker->word(),
