@@ -43,7 +43,8 @@
                                 <span>
                                     <span>R$ {{number_format($product->price,2 , "," , ".")}}</span>
 
-                                            <i class="fa fa-shopping-cart"></i>
+                                    <a class="btn btn-fefault cart" href="{{route('store.cart.add',['id' => $product->id])}}">
+                                    <i class="fa fa-shopping-cart"></i>
                                             Adicionar no Carrinho
                                         </a>
                                 </span>
