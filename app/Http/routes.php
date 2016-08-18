@@ -18,6 +18,8 @@ Route::get('home', 'HomeController@index');
 Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
 
+Route::get('checkout/pleaceOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
