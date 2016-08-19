@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Session;
 class CheckoutController extends Controller
 {
 
-    public function place(Order $order, OrderItem $orderItem)
+    public function place(Order $orderModel, OrderItem $orderItem)
     {
-        $this->order = $order;
 
         if(!Session::has('cart'))
         {
@@ -27,15 +26,15 @@ class CheckoutController extends Controller
 
         if($cart->getTotal() > 0)
         {
-            $order = $this->order->create(['user_id' => 1, 'total' => $cart->getTotal()]);
+            $order = $orderModel->create(['user_id' => 1, 'total' => $cart->getTotal()]);
 
             foreach($cart->all() as $k=>$item)
             {
-                $order->items()->create(['product_id' => $k , 'price' => ['price'], 'qtd' => $item['qtd']]);
+                $order->items()->create(['product_id' => $k , 'price' => $item['price'], 'qtd' => $item['qtd']]);
             }
         }
 
-        dd($order);
+        dd($order->items);
     }
 
 }
