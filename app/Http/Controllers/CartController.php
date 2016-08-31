@@ -43,17 +43,18 @@ class CartController extends Controller
         return redirect()->route('store.cart');
     }
 
+
     public function edit($id, $qtd)
     {
-        $cart = $this->upCart();
+    	
+    	$cart = $this->upCart();
 
         $product = $this->product->find($id);
 
         $cart->edit($id, $product->name, $product->price, $qtd);
 
         Session::set('cart', $cart);
-
-
+		
 
         return redirect()->route('store.cart');
     }

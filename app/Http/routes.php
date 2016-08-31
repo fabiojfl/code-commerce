@@ -18,10 +18,14 @@ Route::get('home', 'HomeController@index');
 Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
 
+
+
 Route::get('cart',                  ['as'=> 'store.cart', 'uses'=>'CartController@index']);
 Route::get('cart/add/{id}',         ['as'=> 'store.cart.add', 'uses'=>'CartController@add']);
 Route::get('cart/destroy/{id}',     ['as'=> 'store.cart.destroy', 'uses'=>'CartController@destroy']);
 Route::get('cart/edit/{id}/{qtd}',  ['as'=> 'store.cart.edit', 'uses'=>'CartController@edit']);
+
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

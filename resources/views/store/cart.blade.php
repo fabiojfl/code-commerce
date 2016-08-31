@@ -3,6 +3,9 @@
    <section id="cart_items">
       <div class="container">
          <div class="table-condensed cart_info">
+         
+         
+         
             <table class="table table-condensed">
                <thead>
                   <tr class="cart_menu">
@@ -66,6 +69,7 @@
                   </tr>
                </tbody>
             </table>
+            
          </div>
       </div>
    </section>
