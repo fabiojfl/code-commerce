@@ -37,7 +37,14 @@
 
                      <td class="cart_quantity text-center">
 
-                        {!! Form::text('name', $item['qtd'], ['class'=>'form-control']) !!}
+                           {!! Form::open(['route'=>['store.cart.update', $k], 'method'=>'put']) !!}
+                                <div class="input-group" style="width: 120px">
+                                    {!! Form::text('qtd', $item['qtd'], ['class'=>'form-control']) !!}
+                                      <span class="input-group-btn">
+                                        {!! Form::submit('Alterar', ['class'=>'btn btn-default']) !!}
+                                      </span>
+                                </div><!-- /input-group -->
+							{!! Form::close() !!}
                      </td>
 
                      <td class="cart_total">
@@ -47,7 +54,7 @@
                         <a href="{{route('store.cart.destroy', ['id'=>$k ])}}" class="cart_quantity_delete">DELETE</a>
                      </td>
                      <td class="cart_edit">
-                        <a href="{{route('store.cart.edit', ['id'=>$k,'qtd'=> 3 ])}}" class="cart_quantity_edit">EDIT</a>
+                        
                      </td>
                   </tr>
                   @empty

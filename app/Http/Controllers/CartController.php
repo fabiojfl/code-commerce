@@ -44,26 +44,13 @@ class CartController extends Controller
     }
 
 
-    public function edit($id, $qtd)
-    {
-    	
-    	$cart = $this->upCart();
-
-        $product = $this->product->find($id);
-
-        $cart->edit($id, $product->name, $product->price, $qtd);
-
-        Session::set('cart', $cart);
-		
-
-        return redirect()->route('store.cart');
-    }
-
     public function destroy($id)
     {
         $cart = $this->getCart();
         $cart->remove($id);
+        
         Session::set('cart', $cart);
+        
         return redirect()->route('store.cart');
     }
 
@@ -84,18 +71,15 @@ class CartController extends Controller
         return $cart;
     }
 
-    public function upCart()
+	public function update(Requests\CartRequest $request, $id)
     {
-        if (Session::has('cart')) {
-
-            $cart = Session::pull('cart');
-
-        } else {
-
-            $cart = $this->cart;
-        }
-
-        return $cart;
+        $qtd = $request->get("qtd");
+        
+        $cart = $this->getCart();
+        $cart->setQtd($id, $qtd);
+        
+        Session::set('cart', $cart);
+        return redirect()->route('store.cart');
     }
 
 
