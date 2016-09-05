@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
             'name' => 'fabiojs',
             'email' => 'fabiojs@gmail.com',
             'password' => bcrypt('admin'),
+            'is_admin' => 1,
             'remember_token' => str_random(10),
         ]);
 

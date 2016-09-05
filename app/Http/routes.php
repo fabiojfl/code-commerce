@@ -26,7 +26,14 @@ Route::get('cart/destroy/{id}',     ['as'=> 'store.cart.destroy', 'uses'=>'CartC
 Route::put('cart/update/{id}',      ['as' => 'store.cart.update', 'uses' => 'CartController@update']);
 
 
-Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+Route::group(['middleware' => 'auth'], function(){
+	
+	Route::get('checkout/placeorder', ['as' => 'store.checkout.place', 'uses' => 'CheckoutController@place']);	
+
+});
+
+
+
 
 Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 

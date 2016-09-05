@@ -40,6 +40,6 @@ class TestController extends Controller
             return "logado";
         }
 
-        return "n√£o esta logado";
+        return "N√O ESTA LOGADO";
     }
 }

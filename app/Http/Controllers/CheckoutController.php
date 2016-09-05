@@ -11,11 +11,14 @@ use CodeCommerce\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use CodeCommerce\Category;
 
 class CheckoutController extends Controller
 {
-    public function __construct()
+    public function __construct(Category $category)
     {
+    	$this->category = $category;
+    	
         $this->middleware('auth');
     }
 
@@ -28,18 +31,27 @@ class CheckoutController extends Controller
         }
 
         $cart = Session::get('cart');
-
+        
         if($cart->getTotal() > 0)
         {
             $order = $orderModel->create(['user_id' => Auth::user()->id, 'total' => $cart->getTotal()]);
 
             foreach($cart->all() as $k=>$item)
             {
-                $order->items()->create(['product_id' => $k , 'price' => $item['price'], 'qtd' => $item['qtd']]);
+              $orderItem =  $order->items()->create(['product_id' => $k , 'price' => number_format($item['price'],2,".", ""), 'qtd' => $item['qtd']]);
             }
-        }
+            
+            $cart->clear();
+            
+            return view('store.checkout', compact('order'));
 
-        dd($order);
+        }
+		
+		$categories = $this->category->all();
+		
+		return view('store.checkout', ['cart'=>'empty', 'categories'=>$categories]);
     }
+    
+    
 
 }

@@ -3,9 +3,6 @@
     <section id="cart_items">
         <div class="container">
             <div class="table-condensed cart_info">
-
-
-
                 <table class="table table-condensed">
                     <thead>
                     <tr class="cart_menu">
@@ -64,13 +61,14 @@
                             </td>
                         </tr>
                     @endforelse
-                    <tr>
-                        <td class="text-center" colspan="7">
+                    <tr class="cart_menu">
+                        <td colspan="6">
                             <div class="pull-right">
-                           <span>
-                              TOTAL: R$ {{$cart->getTotal()}}
-                           </span>
-                                <a href="#" class="btn btn-success">fechar a conta</a>
+                                <span style="margin-right: 40px">
+                                    TOTAL: R$ {{ $cart->getTotal() }}
+                                </span>
+
+                                <a href="{{ route('store.checkout.place') }}" class="btn btn-success">Fechar a conta</a>
                             </div>
                         </td>
                     </tr>
