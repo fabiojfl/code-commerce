@@ -28,13 +28,7 @@ Route::put('cart/update/{id}',      ['as' => 'store.cart.update', 'uses' => 'Car
 
 Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
 
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 
 	Route::group(['prefix' => 'categories/'], function(){
 		//categories
@@ -64,3 +58,9 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('destroy/{id}/image'   ,['as'=>'admin.products.images.destroy', 'uses'=>'AdminProductsController@destroyImage']);
 	});
 });
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+	'test'     => 'TestController'
+]);

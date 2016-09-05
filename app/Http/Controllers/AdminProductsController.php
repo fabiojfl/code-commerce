@@ -20,6 +20,8 @@ class AdminProductsController extends Controller {
     	$this->category = $category;
         $this->product  = $product;
         $this->tag      = $tag;
+
+        $this->middleware('auth');
     }
 
     public function index()
