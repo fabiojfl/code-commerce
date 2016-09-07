@@ -46,7 +46,58 @@
 								<input type="password" class="form-control" name="password_confirmation">
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">CEP</label>
+							<div class="col-md-6">
+								<input ttype="text" class="form-control" name="cep">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Endereço</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="endereco">
+							</div>
+						</div>
 
+						<div class="form-group">
+							<label class="col-md-4 control-label">Nome do destinatário</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="destinatario">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Número</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="numero">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Complemento</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="complemento">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Bairro</label>
+							<div class="col-md-6">
+								<input ttype="text" class="form-control" name="bairro">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Cidade</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="cidade">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Estado</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="estado">
+							</div>
+						</div>
+						<input type="hidden" class="form-control" name="is_admin" value="1">
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
