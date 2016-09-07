@@ -1,5 +1,4 @@
-@extends('app')
-
+@extends('store.store')
 @section('content')
 <div class="container-fluid">
 	<div class="row">
@@ -17,7 +16,6 @@
 							</ul>
 						</div>
 					@endif
-
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 

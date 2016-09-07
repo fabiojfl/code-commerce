@@ -12,6 +12,7 @@ use CodeCommerce\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use CodeCommerce\Category;
+use CodeCommerce\Events\CheckoutEvent;
 
 class CheckoutController extends Controller
 {
@@ -43,10 +44,12 @@ class CheckoutController extends Controller
             
             $cart->clear();
             
+            event(new CheckoutEvent());
+            
             return view('store.checkout', compact('order'));
 
         }
-		
+
 		$categories = $this->category->all();
 		
 		return view('store.checkout', ['cart'=>'empty', 'categories'=>$categories]);

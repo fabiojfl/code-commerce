@@ -1,5 +1,8 @@
 <?php
 
+use CodeCommerce\Events\CheckoutEvent;
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,6 +18,9 @@ Route::get('/', 'StoreController@index');
 Route::get('/product-categories/{id}' ,['as' => 'store.product_categories.products', 'uses' => 'StoreController@product_category']);
 
 Route::get('home', 'HomeController@index');
+
+
+
 Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
 
@@ -28,7 +34,8 @@ Route::put('cart/update/{id}',      ['as' => 'store.cart.update', 'uses' => 'Car
 
 Route::group(['middleware' => 'auth'], function(){
 	
-	Route::get('checkout/placeorder', ['as' => 'store.checkout.place', 'uses' => 'CheckoutController@place']);	
+	Route::get('checkout/placeorder', ['as' => 'store.checkout.place', 'uses' => 'CheckoutController@place']);
+	Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);
 
 });
 
@@ -67,7 +74,7 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 });
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-	'test'     => 'TestController'
+	'auth' 		=> 'Auth\AuthController',
+	'password'  => 'Auth\PasswordController',
+	'test'      => 'TestController'
 ]);
