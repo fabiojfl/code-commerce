@@ -35,7 +35,7 @@ class CheckoutController extends Controller
         
         if($cart->getTotal() > 0)
         {
-            $order = $orderModel->create(['user_id' => Auth::user()->id, 'total' => $cart->getTotal()]);
+            $order = $orderModel->create(['user_id' => Auth::user()->id, 'total' => $cart->getTotal(), 'status' => 'Aguardando Pagamento']);
 
             foreach($cart->all() as $k=>$item)
             {

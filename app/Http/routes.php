@@ -19,18 +19,13 @@ Route::get('/product-categories/{id}' ,['as' => 'store.product_categories.produc
 
 Route::get('home', 'HomeController@index');
 
-
-
 Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
-
-
 
 Route::get('cart',                  ['as'=> 'store.cart', 'uses'=>'CartController@index']);
 Route::get('cart/add/{id}',         ['as'=> 'store.cart.add', 'uses'=>'CartController@add']);
 Route::get('cart/destroy/{id}',     ['as'=> 'store.cart.destroy', 'uses'=>'CartController@destroy']);
 Route::put('cart/update/{id}',      ['as' => 'store.cart.update', 'uses' => 'CartController@update']);
-
 
 Route::group(['middleware' => 'auth'], function(){
 	
@@ -38,9 +33,6 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);
 
 });
-
-
-
 
 Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 
@@ -70,6 +62,12 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 		Route::get('create/{id}/product'  ,['as'=>'admin.products.create_image',   'uses'=>'AdminProductsController@createImage']);
 		Route::post('store/{id}/images'   ,['as'=>'admin.products.images.store',   'uses'=>'AdminProductsController@storeImage']);
 		Route::get('destroy/{id}/image'   ,['as'=>'admin.products.images.destroy', 'uses'=>'AdminProductsController@destroyImage']);
+	});
+	
+	Route::group(['prefix' => 'orders'], function(){
+		Route::get(''                    ,['as'=>'admin.orders.index', 		    'uses'=> 'AdminOrdersController@index']);
+		Route::get('edit-status/{id}'    ,['as'=>'admin.orders.edit_status',	'uses'=> 'AdminOrdersController@editStatus']);
+		Route::put('update-status/{id}'  ,['as'=>'admin.orders.update_status',	'uses'=> 'AdminOrdersController@updateStatus']);
 	});
 });
 

@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             //depois faca total 8.2 assim ('total', 8,2) não esqueca do price do produto tb
-             $table->decimal('total',8,2);
-            $table->smallInteger('status')->default(0);
+            $table->decimal('total',8,2);
+            $table->string('status', 80);
             $table->timestamps();
         });
     }

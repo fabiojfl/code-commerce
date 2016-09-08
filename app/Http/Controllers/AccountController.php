@@ -21,4 +21,6 @@ class AccountController extends Controller
 
    		return view('store.orders', compact('orders'));
    }
+   
+   
 }
