@@ -2,9 +2,10 @@
 /node_modules
 .env
 .idea
-.idea/workspace.xml
 .project
 .settings/
-idea/workspace.xml
-config/database.php
+.idea/workspace.xml
+.config/database.php
+
+
 

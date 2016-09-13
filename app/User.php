@@ -22,13 +22,46 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = [
+		'name',
+		'email',
+		'password',
+		'is_admin',
+		'cep',
+		'endereco',
+		'destinatario',
+		'numero',
+		'complemento',
+		'bairro',
+		'cidade',
+		'estado'
+	];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password', 'remember_token'];
+	protected $hidden = [
+		'password',
+		'remember_token',
+		'is_admin',
+		'cep',
+		'endereco',
+		'destinatario',
+		'numero',
+		'complemento',
+		'bairro',
+		'cidade',
+		'estado'
+
+	];
+
+
+
+	public function orders()
+	{
+		return $this->hasMany('CodeCommerce\Order');
+	}
 
 }

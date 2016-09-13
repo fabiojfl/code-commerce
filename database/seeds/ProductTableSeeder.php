@@ -14,7 +14,7 @@ class ProductTableSeeder extends Seeder
         $faker = Faker::create();
 
         // nao consigo fazer o featured recommend
-        foreach(range(1,15) as $i)
+        foreach(range(1,3) as $i)
         {
             Product::create([
                 'name'         => $faker->word(),
@@ -22,7 +22,7 @@ class ProductTableSeeder extends Seeder
                 'price'        => $faker->numberBetween($min = 10, $max = 10000),
                 'featured'     => $faker->numberBetween($min = 0, $max = 1),
                 'recommend'    => $faker->numberBetween($min = 0, $max = 1),
-                'category_id'  => $faker->numberBetween($min = 1, $max = 10),
+                'category_id'  => $faker->numberBetween($min = 1, $max = 3),
             ]);
         }
 

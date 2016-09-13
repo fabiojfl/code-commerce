@@ -1,9 +1,12 @@
 <?php namespace CodeCommerce\Http\Controllers\Auth;
 
+use CodeCommerce\User;
+use Validator;
 use CodeCommerce\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 
 class AuthController extends Controller {
 
@@ -25,14 +28,64 @@ class AuthController extends Controller {
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
+	 * @param  \CodeCommerce\User  $user
+	 *
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct(Guard $auth, Registrar $registrar, User $user)
 	{
+		$this->user = $user;
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	protected function validator(array $data)
+	{
+		return Validator::make($data, [
+			'name' 			=> 'required|max:255',
+			'email' 		=> 'required|email|max:255|unique:users',
+			'password' 		=> 'required|confirmed|min:6',
+			'cep' 			=> 'required|numeric:255',
+			'endereco' 		=> 'required|max:255',
+			'destinatario' 	=> 'required|max:255',
+			'numero' 		=> 'required|numeric:255',
+			'complemento' 	=> 'required',
+			'bairro' 		=> 'required|max:255',
+			'cidade' 		=> 'required|max:255',
+			'estado' 		=> 'required|max:255',
+		]);
+	}
+
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param  array  $data
+	 * @return User
+	 */
+	protected function create(array $data)
+	{
+		return User::create([
+			'name' 			=> $data['name'],
+			'email' 		=> $data['email'],
+			'password' 		=> bcrypt($data['password']),
+			'cep' 			=> $data['cep'],
+			'endereco' 		=> $data['endereco'],
+			'destinatario' 	=> $data['destinatario'],
+			'numero' 		=> $data['numero'],
+			'complemento' 	=> $data['complemento'],
+			'bairro' 		=> $data['bairro'],
+			'cidade' 		=> $data['cidade'],
+			'estado' 		=> $data['estado'],
+			'is_admin' 		=> $data['is_admin'],
+		]);
+	}
 }

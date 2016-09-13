@@ -20,11 +20,13 @@ class AdminProductsController extends Controller {
     	$this->category = $category;
         $this->product  = $product;
         $this->tag      = $tag;
+
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        $products = $this->product->paginate(5);
+        $products = $this->product->paginate(15);
         return view('admin.products.index', compact('products'));
     }
 
