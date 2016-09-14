@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use CodeCommerce\Category;
 use CodeCommerce\Events\CheckoutEvent;
+use PHPSC\PagSeguro\Items\Item;
+use PHPSC\PagSeguro\Requests\Checkout\CheckoutService;
 
 class CheckoutController extends Controller
 {
@@ -54,7 +56,19 @@ class CheckoutController extends Controller
 		
 		return view('store.checkout', ['cart'=>'empty', 'categories'=>$categories]);
     }
-    
+
+    public function test(CheckoutService $checkoutService)
+    {
+        $checkout = $checkoutService->createCheckoutBuilder()
+            ->addItem(new Item(1, 'Televisão LED 500', 8999.99))
+            ->addItem(new Item(2, 'Video-game mega ultra blaster', 799.99))
+            ->getCheckout();
+
+        $response = $checkoutService->checkout($checkout);
+
+       return redirect($response->getRedirectionUrl());
+
+    }
     
 
 }

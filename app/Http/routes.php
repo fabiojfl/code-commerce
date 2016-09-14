@@ -13,6 +13,7 @@ use CodeCommerce\Events\CheckoutEvent;
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('test', 'CheckoutController@test');
 
 Route::get('/', 'StoreController@index');
 Route::get('/product-categories/{id}' ,['as' => 'store.product_categories.products', 'uses' => 'StoreController@product_category']);
@@ -33,6 +34,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);
 
 });
+
+
 
 Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 

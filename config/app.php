@@ -145,6 +145,7 @@ return [
 		'CodeCommerce\Providers\ConfigServiceProvider',
 		'CodeCommerce\Providers\EventServiceProvider',
 		'CodeCommerce\Providers\RouteServiceProvider',
+		'LaravelPagseguro\LaravelPagseguroServiceProvider',
 
 
 
