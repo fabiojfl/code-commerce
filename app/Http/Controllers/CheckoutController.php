@@ -25,7 +25,7 @@ class CheckoutController extends Controller
         $this->middleware('auth');
     }
 
-    public function place(Order $orderModel, OrderItem $orderItem)
+    public function place(Order $orderModel, OrderItem $orderItem, CheckoutService $checkoutService)
     {
 
         if(!Session::has('cart'))
@@ -37,18 +37,27 @@ class CheckoutController extends Controller
         
         if($cart->getTotal() > 0)
         {
+            $checkout = $checkoutService->createCheckoutBuilder();
+
+//            $response = $checkoutService->checkout($checkout);
+
+
             $order = $orderModel->create(['user_id' => Auth::user()->id, 'total' => $cart->getTotal(), 'status' => 'Aguardando Pagamento']);
 
             foreach($cart->all() as $k=>$item)
             {
-              $orderItem =  $order->items()->create(['product_id' => $k , 'price' => number_format($item['price'],2,".", ""), 'qtd' => $item['qtd']]);
+                $checkout->addItem(new Item($k, $item['name'], number_format($item['price'],2,".",""), $item['qtd']));
+
+                $orderItem =  $order->items()->create(['product_id' => $k , 'price' => number_format($item['price'],2,".", ""), 'qtd' => $item['qtd']]);
             }
             
             $cart->clear();
             
             event(new CheckoutEvent());
-            
-            return view('store.checkout', compact('order'));
+
+            $response = $checkoutService->checkout($checkout->getCheckout());
+
+            return redirect($response->getRedirectionUrl());
 
         }
 
@@ -56,7 +65,7 @@ class CheckoutController extends Controller
 		
 		return view('store.checkout', ['cart'=>'empty', 'categories'=>$categories]);
     }
-
+/*
     public function test(CheckoutService $checkoutService)
     {
         $checkout = $checkoutService->createCheckoutBuilder()
@@ -70,5 +79,5 @@ class CheckoutController extends Controller
 
     }
     
-
+*/
 }
