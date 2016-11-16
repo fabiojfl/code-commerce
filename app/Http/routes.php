@@ -20,6 +20,8 @@ Route::get('/product-categories/{id}' ,['as' => 'store.product_categories.produc
 
 Route::get('home', 'HomeController@index');
 
+Route::get('cart/frete/{id}', 'CartController@frete');
+
 Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
 
@@ -65,8 +67,15 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 		Route::get('create/{id}/product'  ,['as'=>'admin.products.create_image',   'uses'=>'AdminProductsController@createImage']);
 		Route::post('store/{id}/images'   ,['as'=>'admin.products.images.store',   'uses'=>'AdminProductsController@storeImage']);
 		Route::get('destroy/{id}/image'   ,['as'=>'admin.products.images.destroy', 'uses'=>'AdminProductsController@destroyImage']);
+		
+		// fretes admin.products.create_frete
+		Route::get('frete/{id}'  		  ,['as'=>'admin.products.fretes',         'uses'=>'AdminProductsController@fretes']);
+		Route::get('create/{id}/frete'    ,['as'=>'admin.products.create_frete',   'uses'=>'AdminProductsController@createFrete']);
+		Route::post('store/{id}/frete'    ,['as'=>'admin.products.fretes.store',   'uses'=>'AdminProductsController@storeFrete']);
+		Route::get('destroy/{id}/frete'   ,['as'=>'admin.products.fretes.destroy', 'uses'=>'AdminProductsController@destroyFrete']);
 	});
 	
+
 	Route::group(['prefix' => 'orders'], function(){
 		Route::get(''                    ,['as'=>'admin.orders.index', 		    'uses'=> 'AdminOrdersController@index']);
 		Route::get('edit-status/{id}'    ,['as'=>'admin.orders.edit_status',	'uses'=> 'AdminOrdersController@editStatus']);

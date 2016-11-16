@@ -146,9 +146,7 @@ return [
 		'CodeCommerce\Providers\EventServiceProvider',
 		'CodeCommerce\Providers\RouteServiceProvider',
 		'LaravelPagseguro\LaravelPagseguroServiceProvider',
-
-
-
+		'Cagartner\CorreiosConsulta\ServiceProvider',
 	],
 
 	/*
@@ -198,6 +196,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
+		'Correios'    => 'Cagartner\CorreiosConsulta\Facade',
 
 	],
 

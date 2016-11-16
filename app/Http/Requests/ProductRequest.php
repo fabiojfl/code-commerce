@@ -23,9 +23,15 @@ class ProductRequest extends Request {
 	public function rules()
 	{
 		return [
-			'name'=>'required',
-			'description' => 'required',
-			'price' => 'required'
+		
+		'tipo'=>'required',             
+        'formato'=>'required',      
+        'cep_destino'=>'required' , 
+        'peso' =>'required',              
+        'comprimento'=>'required',       
+        'altura'=>'required',            
+        'largura'=>'required' ,          
+        'diametro'=>'required' 
 		];
 	}
 

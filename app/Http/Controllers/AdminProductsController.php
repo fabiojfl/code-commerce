@@ -1,6 +1,7 @@
 <?php namespace CodeCommerce\Http\Controllers;
 
 use CodeCommerce\Http\Requests\ProductImageRequest;
+use CodeCommerce\Http\Requests\ProductFreteRequest;
 use CodeCommerce\Http\Requests\ProductRequest;
 use CodeCommerce\Product;
 use CodeCommerce\ProductImage;
@@ -8,18 +9,21 @@ use CodeCommerce\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use CodeCommerce\Category;
+use CodeCommerce\Frete;
 
 class AdminProductsController extends Controller {
 
     private $category;
 	private $product;
     private $tag;
+	private $frete;
 
-    public function __construct(Category $category, Product $product, Tag $tag)
+    public function __construct(Category $category, Product $product, Tag $tag, Frete $frete)
     {
     	$this->category = $category;
         $this->product  = $product;
         $this->tag      = $tag;
+		$this->frete	= $frete;
 
         $this->middleware('auth');
     }
@@ -91,7 +95,8 @@ class AdminProductsController extends Controller {
         $product = $this->product->find($id);
         return view('admin.products.images', compact('product'));
     }
-
+	
+	
     public function createImage($id)
     {
         $product = $this->product->find($id);
@@ -139,4 +144,76 @@ class AdminProductsController extends Controller {
 
         return $tagsIDs;
     }
+	
+	public function fretes($id)
+	{
+		$frete = $this->product->find($id);
+		return view('admin.products.fretes', compact('frete'));
+	}
+	
+	public function createFrete($id)
+	{
+		$frete = $this->product->find($id);
+		$tipo = ['pac'];
+		$formato = ['envelope'];
+		
+		return view('admin.products.create_frete',compact('frete','tipo','formato'));
+	}
+	
+	public function storeFrete(ProductFreteRequest $productFreteRequest, $id)
+    {
+		
+        $this->frete->create(
+			[			
+				'product_id' 	=> $id,
+				'tipo' 			=> $productFreteRequest->tipo,                           
+				'formato' 		=> $productFreteRequest->formato,      
+				'cep_origem'	=> $productFreteRequest->cep_origem,   
+				'peso'			=> $productFreteRequest->peso,              
+				'comprimento'	=> $productFreteRequest->comprimento,       
+				'altura'		=> $productFreteRequest->altura,            
+				'largura'		=> $productFreteRequest->largura,          
+				'diametro'		=> $productFreteRequest->diametro         
+			
+			]
+		);
+
+        return redirect()->route('admin.products.fretes',['id' => $id]);
+    }
+	
+	public function	destroyFrete($id)
+	{
+		 $frete = $this->frete->find($id);
+
+        $frete->delete();
+
+        return redirect()->route('admin.products.fretes',['id' => $frete->id]);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

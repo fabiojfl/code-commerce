@@ -8,7 +8,8 @@
 		"laravel/framework": "5.1.*",
 		"illuminate/html": "^5.0",
 		"guzzle/guzzle": "^3.9",
-		"guzzlehttp/guzzle": "^6.2"
+		"guzzlehttp/guzzle": "^6.2",
+		"cagartner/correios-consulta": "0.1.*"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",

@@ -30,6 +30,9 @@
                                         <a href="{{ route('admin.products.destroy',['id'=> $product->id]) }}">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </a>
+										<a href="{{ route('admin.products.fretes',['id'=> $product->id]) }}">
+                                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                        </a>
                                 </td>
                         </tr>
                         @endforeach

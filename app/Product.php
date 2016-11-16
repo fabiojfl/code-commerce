@@ -27,7 +27,12 @@ class Product extends Model {
     {
         return $this->hasMany('CodeCommerce\ProductImage');
     }
-
+	
+	public function fretes()
+	{
+		return $this->hasMany('CodeCommerce\Frete');
+	}
+	
     public function getNameDescriptionAttribute()
     {
         return $this->name." - ".$this->description;
