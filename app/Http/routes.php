@@ -30,6 +30,10 @@ Route::get('cart/add/{id}',         ['as'=> 'store.cart.add', 'uses'=>'CartContr
 Route::get('cart/destroy/{id}',     ['as'=> 'store.cart.destroy', 'uses'=>'CartController@destroy']);
 Route::put('cart/update/{id}',      ['as' => 'store.cart.update', 'uses' => 'CartController@update']);
 
+Route::post('cart/addfrete/{id}',         ['as'=> 'store.cart.addfrete', 'uses'=>'CartController@addfrete']);
+
+
+
 Route::group(['middleware' => 'auth'], function(){
 	
 	Route::get('checkout/placeorder', ['as' => 'store.checkout.place', 'uses' => 'CheckoutController@place']);

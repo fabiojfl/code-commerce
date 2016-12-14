@@ -24,14 +24,14 @@ class ProductRequest extends Request {
 	{
 		return [
 		
-		'tipo'=>'required',             
-        'formato'=>'required',      
-        'cep_destino'=>'required' , 
-        'peso' =>'required',              
-        'comprimento'=>'required',       
-        'altura'=>'required',            
-        'largura'=>'required' ,          
-        'diametro'=>'required' 
+		//'tipo'=>'required',
+        //'formato'=>'required',
+        //'cep_destino'=>'required' ,
+        //'peso' =>'required',
+        //'comprimento'=>'required',
+        //'altura'=>'required',
+        //'largura'=>'required' ,
+        //'diametro'=>'required'
 		];
 	}
 

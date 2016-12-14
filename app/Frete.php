@@ -40,7 +40,9 @@ class Frete extends Model
     echo Correios::frete($dados);
 	*/
 	
-	 public function product()
+
+
+    public function product()
     {
         return $this->belongsTo('CodeCommerce\Product');
     }
