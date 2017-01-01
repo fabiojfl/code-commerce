@@ -66,14 +66,45 @@ class CartController extends Controller
         return redirect()->route('store.cart');
     }
 
-    public function addfrete(Request $request, $id)
+    public function addfrete(Request $request)
     {
 
-        $frete = $this->getFrete();
-        $frete->addFrete($request->cep,$id);
+        $dados = [
+            'tipo'              => 'pac', // opções: `sedex`, `sedex_a_cobrar`, `sedex_10`, `sedex_hoje`, `pac`, 'pac_contrato', 'sedex_contrato' , 'esedex'
+            'formato'           => 'caixa', // opções: `caixa`, `rolo`, `envelope`
+            'cep_destino'       => $request->cep, // Obrigatório
+            'cep_origem'        => '71680360', // Obrigatorio
+            //'empresa'         => '', // Código da empresa junto aos correios, não obrigatório.
+            //'senha'           => '', // Senha da empresa junto aos correios, não obrigatório.
+            'peso'              => '1', // Peso em kilos
+            'comprimento'       => '16', // Em centímetros
+            'altura'            => '11', // Em centímetros
+            'largura'           => '11', // Em centímetros
+            'diametro'          => '0', // Em centímetros, no caso de rolo
+            // 'mao_propria'       => '1', // Não obrigatórios
+            // 'valor_declarado'   => '1', // Não obrigatórios
+            // 'aviso_recebimento' => '1', // Não obrigatórios
+        ];
 
+        $fretes = $this->consulta->frete($dados);
+
+
+         $adf = new Cart();
+
+         return $adf->fadd($fretes);
+
+
+        //return Response::json($fretes);
+
+        /*
+        $frete = $this->getFrete();
         Session::set('frete',$frete);
         return redirect()->route('store.cart');
+
+        /*
+        $frete = new Cart();
+        $frete->fadd($id, $request->cep);
+        */
     }
 
     public function destroy($id)
@@ -97,7 +128,7 @@ class CartController extends Controller
         }
         return $cart;
     }
-
+/*
     public function getFrete()
     {
         if (Session::has('freteTotal')) {
@@ -111,7 +142,7 @@ class CartController extends Controller
         }
         return $cartFrete;
     }
-
+*/
     public function update(Requests\CartRequest $request, $id)
     {
         $qtd = $request->get("qtd");
@@ -125,13 +156,13 @@ class CartController extends Controller
 	
 	// IGUAL UM REQUEST
 	
-	public function frete($id)
+	public function buscaFrete($cep)
     {
 
         $dados = [
             'tipo'              => 'pac', // opções: `sedex`, `sedex_a_cobrar`, `sedex_10`, `sedex_hoje`, `pac`, 'pac_contrato', 'sedex_contrato' , 'esedex'
             'formato'           => 'caixa', // opções: `caixa`, `rolo`, `envelope`
-            'cep_destino'       => '71680366', // Obrigatório
+            'cep_destino'       => $cep, // Obrigatório
             'cep_origem'        => '08465312', // Obrigatorio
             //'empresa'         => '', // Código da empresa junto aos correios, não obrigatório.
             //'senha'           => '', // Senha da empresa junto aos correios, não obrigatório.

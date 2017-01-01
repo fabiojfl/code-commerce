@@ -20,7 +20,7 @@ Route::get('/product-categories/{id}' ,['as' => 'store.product_categories.produc
 
 Route::get('home', 'HomeController@index');
 
-Route::get('cart/frete/{id}', 'CartController@frete');
+Route::get('cart/frete/{cep}', 'CartController@buscaFrete');
 
 Route::get('category/{id}', ['as' => 'store.category', 'uses'=>'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses'=>'StoreController@product']);
@@ -30,8 +30,7 @@ Route::get('cart/add/{id}',         ['as'=> 'store.cart.add', 'uses'=>'CartContr
 Route::get('cart/destroy/{id}',     ['as'=> 'store.cart.destroy', 'uses'=>'CartController@destroy']);
 Route::put('cart/update/{id}',      ['as' => 'store.cart.update', 'uses' => 'CartController@update']);
 
-Route::post('cart/addfrete/{id}',         ['as'=> 'store.cart.addfrete', 'uses'=>'CartController@addfrete']);
-
+//Route::post('cart/addfrete/{id}',         ['as'=> 'store.cart.addfrete', 'uses'=>'CartController@addfrete']);
 
 
 Route::group(['middleware' => 'auth'], function(){

@@ -55,16 +55,27 @@
                             </td>
                         </tr>
                         <!-- trabalhando com CEP -->
-                        {!! Form::open(['route'=>['store.cart.addfrete', $k], 'method'=>'post']) !!}
-                        <tr class="cart_menu">
-                            <td colspan="6" class="text-right" style="width: 120px">
-                                {!! Form::text('cep',null ,['class'=>'form-control']) !!}
-                            </td>
-                            <td colspan="7" class="text-right">
-                                {!! Form::submit('Pesquisar', ['class'=>'btn btn-default']) !!}
-                            </td>
-                        </tr>
-                        {!! Form::close() !!}
+                        <div class="login-do">
+                            <div id="msgmCep"></div>
+                            <div class="login-mail col-md-9">
+                                <input type="text" placeholder="CEP" name="cep" id="cep" maxlength="8">
+                            </div>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn hvr-skew-backward" onclick="getCalcFrete()">
+                                Buscar
+                            </button>
+                        </div>
+
+                        <div class="login-mail">
+                            <input type="text" placeholder="Endereço" name="codigo" id="codigo" readonly="readonly">
+                            <input type="text" placeholder="valor" name="valor" id="valor" readonly="readonly">
+                            <input type="text" placeholder="prazo" name="prazo" id="prazo" readonly="readonly">
+                        </div>
+
+
+
+                        <!--"erro":{"codigo":0,"mensagem":""}}-->
+
 
                         <!-- resultado -->
                         <tr class="cart_menu">

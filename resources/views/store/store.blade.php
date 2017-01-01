@@ -142,6 +142,8 @@
 
 
 <script src="{{ elixir('js/all.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/busca-frete.js')}}" type="text/javascript"></script>
 
 </body>
 </html>
