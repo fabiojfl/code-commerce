@@ -41,19 +41,24 @@ class Cart
 
         return $this->items;
     }
-    // returna o cep
-    public function fadd($fretes)
-    {
+	
+	public function fedit($id,$name,$price,$qtd,$fvalue)
+	{
+		$this->items += [
 
-
-        dd($fretes);
-
-
-        //return $this->items += [$id =>['cep' => $cep]];
-    }
-
-
-
+            $id =>
+                [
+                    'qtd'   => isset($this->items[$id][$qtd]) ? $this->items[$id][$qtd]++ : 1,
+                    'price' => $price,
+                    'name'  => $name,
+					'frete' => $fvalue
+                ]
+        ];
+		
+		 return $this->items;
+	}
+	
+  
     public function remove($id)
     {
         unset($this->items[$id]);
@@ -73,21 +78,17 @@ class Cart
         }
         return $total;
     }
-
-    //calculo do valor do frete
-    /*
+	
     public function getFreteTotal()
     {
-        $freteTotal = 0;
-
+        $total = 0;
         foreach($this->items as $items)
         {
-            $freteTotal += $items['qtd'] * $items['price'];
+          $total += $items['qtd'] * $items['price'] + $items['frete'];
         }
-        return $freteTotal;
+        return $ftotal;
     }
-    */
-    
+	    
     public function setQtd($id, $qtd)
     {
     	if($qtd > 0){

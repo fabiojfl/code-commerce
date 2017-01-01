@@ -72,8 +72,10 @@ class CartController extends Controller
         $dados = [
             'tipo'              => 'pac', // opções: `sedex`, `sedex_a_cobrar`, `sedex_10`, `sedex_hoje`, `pac`, 'pac_contrato', 'sedex_contrato' , 'esedex'
             'formato'           => 'caixa', // opções: `caixa`, `rolo`, `envelope`
+			// quando eu submeto la no html veja:
             'cep_destino'       => $request->cep, // Obrigatório
-            'cep_origem'        => '71680360', // Obrigatorio
+			// esse é o cep default que será feito na area administrativa .
+            'cep_origem'        => '71680360', // Obrigatorio 
             //'empresa'         => '', // Código da empresa junto aos correios, não obrigatório.
             //'senha'           => '', // Senha da empresa junto aos correios, não obrigatório.
             'peso'              => '1', // Peso em kilos
@@ -155,7 +157,6 @@ class CartController extends Controller
     }
 	
 	// IGUAL UM REQUEST
-	
 	public function buscaFrete($cep)
     {
 

@@ -3,7 +3,9 @@ function getCalcFrete() {
     if ($("#cep").val()) {
 
         $('#msgmCep').html("");
-
+		// como trabalhar essa url?
+		// como fazer ficar assim? 
+		// como fazer uma espécie de no Jquery?
         $.get('http://localhost:8000/cart/frete/' + $("#cep").val(), function (data) {
             $('#msgmCep').html("<p class='alert alert-success'>CEP encontrado</p>");
             $('#codigo').val(data['codigo']);
@@ -31,5 +33,7 @@ function getCalcFrete() {
         $('#state').val("");
 
         */
+		
+	// essa é abusca feita
     }
 }
